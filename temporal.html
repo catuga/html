@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>era algo temporal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            padding: 20px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        #container {
+            width: 100%;
+            max-width: 800px;
+            min-height: 500px;
+            position: relative;
+        }
+        
+        .line {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+            margin: 20px 0;
+            font-size: clamp(16px, 4vw, 24px);
+            position: absolute;
+            white-space: nowrap;
+        }
+        
+        .line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .line:nth-child(1) { left: 0; top: 20px; }
+        .line:nth-child(2) { left: clamp(180px, 35%, 280px); top: 60px; }
+        .line:nth-child(3) { left: clamp(80px, 15%, 120px); top: 140px; }
+        .line:nth-child(4) { left: 40px; top: 220px; }
+        .line:nth-child(5) { left: clamp(120px, 25%, 200px); top: 270px; }
+        .line:nth-child(6) { left: clamp(120px, 25%, 200px); top: 320px; }
+        .line:nth-child(7) { left: clamp(120px, 25%, 200px); top: 370px; }
+        .line:nth-child(8) { 
+            left: clamp(120px, 25%, 200px); 
+            top: 530px;
+            transform: rotate(180deg) translateY(20px);
+            transform-origin: center;
+        }
+        
+        .line:nth-child(8).visible {
+            transform: rotate(180deg) translateY(0);
+            transform-origin: center;
+        }
+        
+        @media (max-width: 600px) {
+            #container {
+                min-height: 450px;
+            }
+            
+            .line:nth-child(1) { left: 0; top: 10px; }
+            .line:nth-child(2) { left: 40%; top: 50px; }
+            .line:nth-child(3) { left: 15%; top: 110px; }
+            .line:nth-child(4) { left: 5%; top: 180px; }
+            .line:nth-child(5) { left: 25%; top: 230px; }
+            .line:nth-child(6) { left: 25%; top: 275px; }
+            .line:nth-child(7) { left: 25%; top: 320px; }
+            .line:nth-child(8) { 
+                left: 25%; 
+                top: 430px;
+            }
+        }
+        
+        #instruction {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #666;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+        
+        #instruction.hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="line">era algo temporal</div>
+        <div class="line">decían</div>
+        <div class="line">¿pero qué no lo es?</div>
+        <div class="line">si caía más</div>
+        <div class="line">más</div>
+        <div class="line">más</div>
+        <div class="line">más</div>
+        <div class="line">¿se invertiría la dirección?</div>
+    </div>
+    
+    <div id="instruction">tap tap</div>
+    
+    <script>
+        const lines = document.querySelectorAll('.line');
+        const instruction = document.getElementById('#instruction');
+        let currentLine = 0;
+        
+        document.body.addEventListener('click', function() {
+            if (currentLine < lines.length) {
+                lines[currentLine].classList.add('visible');
+                currentLine++;
+                
+                if (currentLine === 1 && instruction) {
+                    instruction.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
