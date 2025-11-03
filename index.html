@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>narrativas</title>
+    <title>tap tap</title>
     <style>
         * {
             margin: 0;
@@ -12,118 +12,35 @@
         }
         
         body {
-            background: #0a0a0a;
-            color: #666;
+            background: #fff;
+            color: #00f;
             font-family: 'Courier New', monospace;
             min-height: 100vh;
-            padding: 60px 20px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        header {
-            margin-bottom: 80px;
-        }
-        
-        h1 {
-            font-size: 14px;
-            font-weight: normal;
-            letter-spacing: 2px;
-            text-transform: lowercase;
-            color: #666;
+            padding: 40px 20px;
         }
         
         .list {
             list-style: none;
-            border-left: 1px solid #222;
-            padding-left: 30px;
         }
         
         .list li {
-            margin: 40px 0;
-            position: relative;
-        }
-        
-        .list li::before {
-            content: '→';
-            position: absolute;
-            left: -30px;
-            color: #333;
-            transition: all 0.3s;
-        }
-        
-        .list li:hover::before {
-            color: #e0e0e0;
-            left: -25px;
+            margin: 15px 0;
         }
         
         .list a {
-            color: #e0e0e0;
+            color: #00f;
             text-decoration: none;
-            font-size: 18px;
-            transition: color 0.3s;
-            display: block;
+            font-size: 16px;
         }
         
         .list a:hover {
-            color: #fff;
-        }
-        
-        .meta {
-            display: block;
-            font-size: 12px;
-            color: #444;
-            margin-top: 5px;
-        }
-        
-        footer {
-            margin-top: 100px;
-            font-size: 11px;
-            text-align: center;
-            color: #333;
-        }
-        
-        @media (max-width: 600px) {
-            body {
-                padding: 40px 20px;
-            }
-            
-            header {
-                margin-bottom: 60px;
-            }
-            
-            .list {
-                padding-left: 20px;
-            }
-            
-            .list li {
-                margin: 30px 0;
-            }
-            
-            .list li::before {
-                left: -20px;
-            }
-            
-            .list a {
-                font-size: 16px;
-            }
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>narrativas interactivas</h1>
-    </header>
-    
     <ul class="list">
-        <li>
-            <a href="temporal.html">era algo temporal</a>
-            <span class="meta">nov 2024</span>
-        </li>
+        <li><a href="temporal.html">1</a></li>
     </ul>
-    
-    <footer>
-        [ clic ]
-    </footer>
 </body>
 </html>
