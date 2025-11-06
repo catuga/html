@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chuta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .character {
+            width: 80px;
+            height: 70px;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .speech-bubble {
+            position: relative;
+            background: #000;
+            border: 3px solid #fff;
+            padding: 15px 25px;
+            min-width: 120px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 15px solid #fff;
+        }
+        
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-top: 12px solid #000;
+            z-index: 1;
+        }
+        
+        #text {
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="speech-bubble">
+            <span id="text">...</span>
+        </div>
+
+        <canvas id="character" class="character" width="80" height="80"></canvas>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('character');
+        const ctx = canvas.getContext('2d');
+
+        const scale = 10;
+        
+        // PJ (8x8)
+        // 0 = transparente, 1 = blanco
+        const sprite = [
+            [0,0,1,1,1,1,0,0],
+            [0,1,1,1,1,1,1,0],
+            [0,1,0,1,1,0,1,0],
+            [0,1,1,1,1,1,1,0],
+            [0,0,1,1,1,1,0,0],
+            [0,1,1,0,0,1,1,0],
+            [0,1,1,0,0,1,1,0],
+            [0,1,0,0,0,0,1,0]
+        ];
+        
+        // dibujo
+        function drawSprite() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let y = 0; y < sprite.length; y++) {
+                for (let x = 0; x < sprite[y].length; x++) {
+                    if (sprite[y][x] === 1) {
+                        ctx.fillStyle = '#fff';
+                        ctx.fillRect(x * scale, y * scale, scale, scale);
+                    }
+                }
+            }
+        }
+        
+        drawSprite();
+        
+        // texto
+        const textElement = document.getElementById('text');
+        let isChuta = false;
+        
+        setInterval(() => {
+            textElement.style.opacity = '0';
+            setTimeout(() => {
+                textElement.textContent = isChuta ? '...' : 'chuta';
+                textElement.style.opacity = '1';
+                isChuta = !isChuta;
+            }, 300);
+        }, 2000);
+    </script>
+</body>
+</html>
