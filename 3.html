@@ -57,8 +57,8 @@
         const ctx = canvas.getContext('2d');
         const scale = 10;
         
-        // Gato sentado (12x12 pixels)
-        const cat = [
+        // Parte superior del gato (cabeza y cuerpo - fijos)
+        const catUpper = [
             [0,0,0,0,0,0,0,0,0,0,0,0],
             [0,0,1,0,0,0,0,0,0,1,0,0],
             [0,0,1,1,0,0,0,0,1,1,0,0],
@@ -67,24 +67,55 @@
             [0,0,0,1,1,1,1,1,1,0,0,0],
             [0,0,0,1,1,0,0,1,1,0,0,0],
             [0,0,1,1,1,1,1,1,1,1,0,0],
-            [0,1,1,1,1,1,1,1,1,1,1,0],
-            [0,1,1,0,0,0,0,0,0,1,1,0],
-            [0,1,1,0,0,0,0,0,0,1,1,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0]
+            [0,1,1,1,1,1,1,1,1,1,1,0]
         ];
+        
+        // Piernas - frame 1
+        const legs1 = [
+            [0,1,1,0,0,0,0,0,0,1,1,0],
+            [0,1,1,0,0,0,0,0,0,1,1,0]
+        ];
+        
+        // Piernas - frame 2 (más juntas)
+        const legs2 = [
+            [0,0,1,1,0,0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0,0,1,1,0,0]
+        ];
+        
+        let frame = 0;
         
         function drawCat() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            for (let y = 0; y < cat.length; y++) {
-                for (let x = 0; x < cat[y].length; x++) {
-                    if (cat[y][x] === 1) {
+            // Dibujar parte superior (siempre igual)
+            for (let y = 0; y < catUpper.length; y++) {
+                for (let x = 0; x < catUpper[y].length; x++) {
+                    if (catUpper[y][x] === 1) {
                         ctx.fillStyle = '#e0e0e0';
                         ctx.fillRect(x * scale, y * scale, scale, scale);
                     }
                 }
             }
+            
+            // Dibujar piernas (alterna entre frames)
+            const currentLegs = frame % 2 === 0 ? legs1 : legs2;
+            const startY = 9;
+            
+            for (let y = 0; y < currentLegs.length; y++) {
+                for (let x = 0; x < currentLegs[y].length; x++) {
+                    if (currentLegs[y][x] === 1) {
+                        ctx.fillStyle = '#e0e0e0';
+                        ctx.fillRect(x * scale, (startY + y) * scale, scale, scale);
+                    }
+                }
+            }
         }
+        
+        // Animar
+        setInterval(() => {
+            frame++;
+            drawCat();
+        }, 500);
         
         drawCat();
     </script>
