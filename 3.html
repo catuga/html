@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaristo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            max-width: 600px;
+            padding: 20px;
+        }
+        
+        .cat {
+            width: 120px;
+            height: 120px;
+            image-rendering: pixelated;
+        }
+        
+        .text {
+            color: #e0e0e0;
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="cat" class="cat" width="120" height="120"></canvas>
+        
+        <div class="text">
+            Acá todos hablamos, lo que pasa es que nadie quiere escuchar
+        </div>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('cat');
+        const ctx = canvas.getContext('2d');
+        const scale = 10;
+        
+        // Gato sentado (12x12 pixels)
+        const cat = [
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,1,0,0,0,0,0,0,1,0,0],
+            [0,0,1,1,0,0,0,0,1,1,0,0],
+            [0,0,0,1,1,1,1,1,1,0,0,0],
+            [0,0,0,1,0,1,1,0,1,0,0,0],
+            [0,0,0,1,1,1,1,1,1,0,0,0],
+            [0,0,0,1,1,0,0,1,1,0,0,0],
+            [0,0,1,1,1,1,1,1,1,1,0,0],
+            [0,1,1,1,1,1,1,1,1,1,1,0],
+            [0,1,1,0,0,0,0,0,0,1,1,0],
+            [0,1,1,0,0,0,0,0,0,1,1,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ];
+        
+        function drawCat() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let y = 0; y < cat.length; y++) {
+                for (let x = 0; x < cat[y].length; x++) {
+                    if (cat[y][x] === 1) {
+                        ctx.fillStyle = '#e0e0e0';
+                        ctx.fillRect(x * scale, y * scale, scale, scale);
+                    }
+                }
+            }
+        }
+        
+        drawCat();
+    </script>
+</body>
+</html>
